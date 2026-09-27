@@ -1,0 +1,70 @@
+Berikut adalah beberapa fungsi umum di spreadsheet dan padanannya di SQL yang akan kita pelajari:
+
+TRIM(): Di spreadsheet, Anda mungkin menggunakan TRIM() untuk menghilangkan spasi berlebih di awal atau akhir teks. 
+Di SQL, fungsi TRIM() memiliki fungsi yang sama persis.
+
+CONCATENATE() / &: Untuk menggabungkan teks dari beberapa sel, spreadsheet menggunakan CONCATENATE() 
+atau operator &. Di SQL, kita bisa menggunakan fungsi CONCAT().
+
+REPLACE() / SUBSTITUTE(): Apabila Anda ingin mengganti bagian dari teks di spreadsheet, 
+Anda bisa menggunakan REPLACE() atau SUBSTITUTE(). SQL juga menyediakan fungsi REPLACE() yang serupa.
+
+COUNT() / COUNTA(): Untuk menghitung jumlah item, spreadsheet memiliki COUNT() atau COUNTA(). 
+Di SQL, kita menggunakan COUNT() untuk menghitung baris atau nilai non-NULL.
+
+Fungsi Unik atau Distinct: Menemukan nilai unik di spreadsheet sering kali melibatkan trik khusus 
+atau fitur lanjutan. Di SQL, COUNT(DISTINCT) dapat dengan mudah menghitung jumlah nilai unik.
+
+ISBLANK() / IF(ISBLANK(), …): Untuk mengisi sel kosong di spreadsheet, Anda bisa menggabungkan 
+fungsi ISBLANK() dengan IF(). Di SQL, ada fungsi COALESCE() yang secara elegan menangani nilai NULL.
+
+1. penggunaan TRIM() di big query
+SELECT
+  name AS nama_produk,
+  TRIM(name) AS nama_produk_bersih
+FROM
+  `bigquery-public-data.usa_names.usa_1910_current`
+LIMIT 5;
+
+2. Penggunaan concat di big query
+gabungin teks
+SELECT
+  name AS nama_depan,
+  UPPER(state) AS nama_belakang,
+  CONCAT(name, ' ', UPPER(state)) AS nama_lengkap
+FROM
+  `bigquery-public-data.usa_names.usa_1910_current`
+LIMIT 5;
+
+3. Penggunaan replace() di big query
+nyari substring dan ganti pake substring lain
+SELECT
+  country_name,
+  REPLACE(country_name, 'Myanmar', 'MYAN BARU') AS country_rename,
+FROM
+  `bigquery-public-data.utility_us.country_code_iso`
+LIMIT 10;
+
+4. count Distinct
+Fungsi COUNT() adalah salah satu fungsi agregat paling dasar dan penting di SQL. Fungsi ini memiliki beberapa variasi:
+
+COUNT(*): Menghitung total jumlah baris dalam sebuah tabel, termasuk baris yang mungkin 
+memiliki nilai NULL di beberapa kolomnya.
+
+COUNT(nama_kolom): Menghitung jumlah baris yang memiliki nilai non-NULL pada nama_kolom yang 
+spesifik. Ini berguna untuk melihat berapa banyak entri yang benar-benar memiliki data pada kolom tersebut.
+
+COUNT(DISTINCT nama_kolom): Menghitung jumlah nilai unik (tidak ada duplikasi) pada nama_kolom
+ yang spesifik. Ini adalah cara yang sangat efektif untuk mendeteksi potensi duplikasi.
+
+5. Penggunaan coalese pada big query
+mengisi nilai kosong
+
+SELECT
+  usaf,
+  COALESCE(name, 'Tidak Diketahui') AS nama_stasiun
+FROM
+  `bigquery-public-data.noaa_gsod.stations`
+WHERE 
+  name is null
+LIMIT 10;

@@ -68,3 +68,35 @@ FROM
 WHERE 
   name is null
 LIMIT 10;
+
+
+Penggunaan agregasi dalam sql/bigquery
+Fungsi agregat adalah fungsi yang bekerja pada sekumpulan nilai dan mengembalikan satu nilai 
+ringkasan. Contoh fungsi agregat yang paling umum adalah:
+
+COUNT(): Menghitung jumlah baris atau nilai.
+SUM(): Menghitung total nilai dari sebuah kolom.
+AVG(): Menghitung nilai rata-rata dari sebuah kolom.
+MIN(): Menemukan nilai terkecil dari sebuah kolom.
+MAX(): Menemukan nilai terbesar dari sebuah kolom.
+
+Perbedaan Kunci antara WHERE dan HAVING:
+
+WHERE: Memfilter baris sebelum GROUP BY dan fungsi agregat diterapkan. 
+Tidak bisa menggunakan fungsi agregat dalam kondisi WHERE.
+
+HAVING: Memfilter grup setelah GROUP BY dan fungsi agregat diterapkan. 
+Dapat menggunakan fungsi agregat dalam kondisinya.
+
+Urutan Eksekusi Kueri SQL (Logis):
+
+Penting untuk memahami bahwa meskipun Anda menulis klausa dalam urutan tertentu, 
+SQL mengeksekusinya dalam urutan logis yang berbeda:
+
+FROM: Menentukan tabel sumber data.
+WHERE: Memfilter baris data individual.
+GROUP BY: Mengelompokkan baris yang tersisa.
+Fungsi Agregat: Diterapkan pada setiap grup.
+HAVING: Memfilter grup yang telah diagregasi.
+SELECT: Memilih kolom untuk ditampilkan.
+ORDER BY: Mengurutkan hasil akhir.
